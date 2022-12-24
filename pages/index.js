@@ -10,6 +10,8 @@ const Home = () => {
   const [isGenerating, setIsGenerating] = useState(false)
 
   const callGenerateEndpoint = async () => {
+    window.plausible("Convert")
+
     setIsGenerating(true);
     setApiOutput('');
 
