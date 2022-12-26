@@ -38,42 +38,18 @@ Rephrased: It is important to share information like this with the team sooner, 
 Original: why would I go into the office if I can do my job from here?
 Rephrased: Can you help me understand why I am required to be in the office when I can effectively execute my job responsibilities remotely?
 Original: `;
+
 const generateAction = async (req, res) => {
-  // Run first prompt
   console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`)
 
   const baseCompletion = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${req.body.userInput}\n`,
+    prompt: `${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`,
     temperature: 0.7,
     max_tokens: 1000,
   });
   
   const basePromptOutput = baseCompletion.data.choices.pop();
-
-  // const secondPrompt = 
-  // `
-  // Write me a script to summarize the book using the table of contents above. Make the tone friendly and don't show the table of contents in script. Go in depth and elaborate each of the points. Also give an example for each of the points if the book is non-fiction. The script should be more than 500 words.
-
-  // Title: ${req.body.userInput}
-
-  // Table of Contents: ${basePromptOutput.text}
-
-  // Script:
-  // `
-  
-  // // I call the OpenAI API a second time with Prompt #2
-  // const secondPromptCompletion = await openai.createCompletion({
-  //   model: 'text-davinci-003',
-  //   prompt: `${secondPrompt}`,
-  //   // I set a higher temperature for this one. Up to you!
-  //   temperature: 0.70,
-	// 	// I also increase max_tokens.
-  //   max_tokens: 1000,
-  // });
-  
-  // // Get the output
-  // const secondPromptOutput = secondPromptCompletion.data.choices.pop();
 
   res.status(200).json({ output: basePromptOutput });
 };
