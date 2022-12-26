@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
 import buildspaceLogo from '../assets/buildspace-logo.png';
 
@@ -38,9 +37,6 @@ const Home = () => {
 
   return (
     <div className="root">
-      <Head>
-        <title>SoundBetter</title>
-      </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
