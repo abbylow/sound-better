@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>{"SoundBetter - Turn your thoughts to be professional messages"}</title>
         <link rel="icon" href="/favicon.ico" />
 
         <meta
