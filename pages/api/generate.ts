@@ -1,7 +1,11 @@
-import { Configuration, OpenAIApi } from 'openai';
+import {
+	Configuration,
+	CreateCompletionResponseChoicesInner,
+	OpenAIApi,
+} from "openai";
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+	apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -39,19 +43,31 @@ Original: why would I go into the office if I can do my job from here?
 Rephrased: Can you help me understand why I am required to be in the office when I can effectively execute my job responsibilities remotely?
 Original: `;
 
-const generateAction = async (req, res) => {
-  console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`)
+const generateAction = async (
+	req: { body: { userInput: string } },
+	res: {
+		status: (arg0: number) => {
+			(): any;
+			new (): any;
+			json: {
+				(arg0: { output: CreateCompletionResponseChoicesInner }): void;
+				new (): any;
+			};
+		};
+	}
+) => {
+	console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`);
 
-  const baseCompletion = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`,
-    temperature: 0.7,
-    max_tokens: 1000,
-  });
-  
-  const basePromptOutput = baseCompletion.data.choices.pop();
+	const baseCompletion = await openai.createCompletion({
+		model: "text-davinci-003",
+		prompt: `${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`,
+		temperature: 0.7,
+		max_tokens: 1000,
+	});
 
-  res.status(200).json({ output: basePromptOutput });
+	const basePromptOutput = baseCompletion.data.choices.pop();
+
+	res.status(200).json({ output: basePromptOutput });
 };
 
 export default generateAction;

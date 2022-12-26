@@ -1,7 +1,15 @@
 import Head from 'next/head';
+import type { AppProps } from 'next/app';
+
 import './styles.css';
 
-function App({ Component, pageProps }) {
+declare global {
+	interface Window {
+		plausible: any;
+	}
+}
+
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>

@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
+import type { NextPage } from 'next';
 
-const Home = () => {
-  const [userInput, setUserInput] = useState('');
-
-  const [apiOutput, setApiOutput] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
+const Home: NextPage = () => {
+  const [userInput, setUserInput] = useState<string>('');
+  const [apiOutput, setApiOutput] = useState<string>('');
+  const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   const callGenerateEndpoint = async () => {
-    window.plausible("Convert")
+    window.plausible("Convert");
 
     setIsGenerating(true);
     setApiOutput('');
@@ -25,11 +25,11 @@ const Home = () => {
     const { output } = data;
     console.log("OpenAI replied...", output.text)
 
-    setApiOutput(`${output.text}`);
+    setApiOutput(output.text);
     setIsGenerating(false);
   }
 
-  const onUserChangedText = (event) => {
+  const onUserChangedText = (event: { target: { value: string } }) => {
     setUserInput(event.target.value);
   };
 
