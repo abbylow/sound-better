@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import Script from 'next/script'
 import { MantineProvider, MantineThemeOverride } from '@mantine/core';
+import Head from 'next/head';
 import AppLayout from '../components/Layout';
 
 import './styles.css';
@@ -17,6 +18,7 @@ const myTheme: MantineThemeOverride = {
   headings: { fontFamily: 'Inter, sans serif' },
   colorScheme: 'light',
   primaryColor: 'indigo',
+  black: '#2c2c2c',
   fontSizes: {
     xs: 12,
     sm: 14,
@@ -42,6 +44,9 @@ const myTheme: MantineThemeOverride = {
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <title>SoundBetter</title>
+      </Head>
       <Script
         defer={true}
         data-domain="sound-better-production.up.railway.app"

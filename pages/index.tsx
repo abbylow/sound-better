@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
-import Head from 'next/head';
 
 const Home: NextPage = () => {
   const [userInput, setUserInput] = useState<string>('');
@@ -35,51 +34,44 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="root">
-      <Head>
-        <title>SoundBetter</title>
-      </Head>
-      <div className="container">
-        <div className="header">
-          <div className="header-title">
+      <div>
+        <div>
+          <div>
             <h1>Struggle with words at work?</h1>
           </div>
-          <div className="header-subtitle">
+          <div>
             <h2>Input your thoughts below, we will turn it to a professional message</h2>
           </div>
         </div>
-        <div className="prompt-container">
+        <div>
           <textarea
-            className="prompt-box"
             placeholder="Eg: I deserve a raise"
             value={userInput}
             onChange={onUserChangedText}
           />
         </div>
-        <div className="prompt-buttons">
+        <div>
           <a
-            className={isGenerating ? 'generate-button loading' : 'generate-button'}
             onClick={callGenerateEndpoint}
           >
-            <div className="generate">
-              {isGenerating ? <span className="loader"></span> : <p>Convert</p>}
+            <div>
+              {isGenerating ? <span></span> : <p>Convert</p>}
             </div>
           </a>
         </div>
         {apiOutput && (
-          <div className="output">
-            <div className="output-header-container">
-              <div className="output-header">
+          <div>
+            <div>
+              <div>
                 <h3>Output:</h3>
               </div>
             </div>
-            <div className="output-content">
+            <div>
               <p>{apiOutput}</p>
             </div>
           </div>
         )}
       </div>
-    </div>
   );
 };
 
