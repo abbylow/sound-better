@@ -1,5 +1,6 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import type { NextPage } from 'next';
+import Head from 'next/head';
 
 const Home: NextPage = () => {
   const [userInput, setUserInput] = useState<string>('');
@@ -35,6 +36,9 @@ const Home: NextPage = () => {
 
   return (
     <div className="root">
+      <Head>
+        <title>SoundBetter</title>
+      </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
@@ -50,7 +54,7 @@ const Home: NextPage = () => {
             placeholder="Eg: I deserve a raise"
             value={userInput}
             onChange={onUserChangedText}
-          />;
+          />
         </div>
         <div className="prompt-buttons">
           <a
