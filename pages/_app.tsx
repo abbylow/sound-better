@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import Script from 'next/script'
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, MantineThemeOverride } from '@mantine/core';
+import AppLayout from '../components/Layout';
 
 import './styles.css';
 
@@ -10,25 +11,53 @@ declare global {
   }
 }
 
+const myTheme: MantineThemeOverride = {
+  fontFamily: 'Inter, sans serif',
+  fontFamilyMonospace: 'Inter, sans serif',
+  headings: { fontFamily: 'Inter, sans serif' },
+  colorScheme: 'light',
+  primaryColor: 'indigo',
+  fontSizes: {
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 20,
+  },
+  components: {
+    Container: {
+      defaultProps: {
+        sizes: {
+          xs: 640,
+          sm: 768,
+          md: 1024,
+          lg: 1280,
+          xl: 1536,
+        },
+      },
+    },
+  },
+};
+
 function App({ Component, pageProps }: AppProps) {
   return (
-    <MantineProvider
-      theme={{
-        // Override any other properties from default theme
-        fontFamily: 'Manrope, sans serif',
-        colorScheme: 'dark'
-      }}
-      withGlobalStyles
-      withNormalizeCSS
-    >
+    <>
       <Script
         defer={true}
         data-domain="sound-better-production.up.railway.app"
         src='/js/script.js'
         strategy='afterInteractive'
       />
-      <Component {...pageProps} />
-    </MantineProvider>
+      <MantineProvider
+        theme={myTheme}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
+      </MantineProvider>
+    </>
   )
 }
 export default App;

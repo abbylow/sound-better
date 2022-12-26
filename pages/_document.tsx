@@ -12,6 +12,11 @@ export default class _Document extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" />
 
+          <link
+						href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap'
+						rel='stylesheet'
+					/>
+
           <meta
             name="description"
             content="Struggle with words at work? Let SoundBetter rephrase it professionally for you. Speak up while maintain good impression. "
