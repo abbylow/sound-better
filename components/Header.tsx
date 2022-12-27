@@ -9,7 +9,11 @@ import soundBetterLogo from '../assets/logo.svg';
 
 const AppHeader: React.FC = () => {
   return (
-    <Header height={60} p="md" style={{ backgroundColor: '#fafafa' }}>
+    <Header
+      height={60}
+      p="md"
+      sx={{ backgroundColor: '#fafafa' }}
+    >
       <Container size="lg">
         <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <Image
@@ -17,7 +21,7 @@ const AppHeader: React.FC = () => {
             height={28}
             src={soundBetterLogo.src}
             alt="Sound Better logo"
-            style={{ marginRight: '4px' }}
+            sx={{ marginRight: '4px' }}
           />
           <Text fw={700} fz="xl">SoundBetter</Text>
         </div>
