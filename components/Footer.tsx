@@ -8,7 +8,7 @@ import { socialMedia } from '../constants/links';
 
 const AppFooter: React.FC = () => {
   return (
-    <Footer height={{ base: 110, sm: 70 }} p="md" sx={{ backgroundColor: "#fafafa" }}>
+    <Footer height={{ base: 110, sm: 70 }} p="md" bg={'#fafafa'}>
       <Container size="lg" sx={{ height: '100%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', flexWrap: 'wrap' }}>
           <Text fw={700} fz="md">© 2022 SoundBetter. All rights reserved.</Text>
@@ -27,7 +27,7 @@ const AppFooter: React.FC = () => {
                     height={28}
                     src={sm.imgSrc}
                     alt={sm.imgAlt}
-                    sx={{ margin: '4px' }}
+                    m={4}
                   />
                 </a>
               ))
