@@ -4,7 +4,7 @@ import {
   Text,
   ActionIcon,
 } from '@mantine/core';
-import { IconCup, IconBrandTwitter, IconBrandLinkedin } from '@tabler/icons';
+import { IconCup, IconBrandTwitter, IconBrandGithub } from '@tabler/icons';
 
 const AppFooter: React.FC = () => {
   return (
@@ -17,8 +17,8 @@ const AppFooter: React.FC = () => {
             <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://twitter.com/Abby25855379"  target="_blank">
               <IconBrandTwitter size={24} />
             </ActionIcon>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://www.linkedin.com/in/abbylow0713/"  target="_blank">
-              <IconBrandLinkedin size={24} />
+            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://github.com/abbylow"  target="_blank">
+              <IconBrandGithub size={24} />
             </ActionIcon>
             <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://www.buymeacoffee.com/abbylow" target="_blank">
               <IconCup size={24} />
