@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
 import { ActionIcon, Loader, Title, TextInput, Text } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight } from '@tabler/icons';
 
 const Home: NextPage = () => {
@@ -36,16 +37,19 @@ const Home: NextPage = () => {
     setUserInput(event.target.value);
   };
 
+  const largeScreen = useMediaQuery('(min-width: 992px)');
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '24px' }}>
-      <div>
-        <div>
-          <Title mt={24} order={1} size={48}>Struggle with words at work?</Title>
-        </div>
-        <div>
-          <Text fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
-        </div>
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '24px', marginTop: '24px' }}>
+      <Title mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
+        '@media (max-width: 755px)': {
+          padding: theme.spacing.sm,
+        },
+      })}>
+        Struggle with words at work?
+      </Title>
+      <Text fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
+
       <form style={{ marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' }} onSubmit={callGenerateEndpoint}>
         <TextInput
           value={userInput}
