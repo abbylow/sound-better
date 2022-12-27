@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
+import { ActionIcon, Loader, Title, TextInput, Text } from '@mantine/core';
+import { IconArrowRight } from '@tabler/icons';
 
 const Home: NextPage = () => {
   const [userInput, setUserInput] = useState<string>('');
   const [apiOutput, setApiOutput] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
-  const callGenerateEndpoint = async () => {
+  const callGenerateEndpoint = async (event) => {
+    event.preventDefault();
     window.plausible("Convert");
 
     setIsGenerating(true);
@@ -34,44 +37,39 @@ const Home: NextPage = () => {
   };
 
   return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '24px' }}>
       <div>
         <div>
-          <div>
-            <h1>Struggle with words at work?</h1>
-          </div>
-          <div>
-            <h2>Input your thoughts below, we will turn it to a professional message</h2>
-          </div>
+          <Title mt={24} order={1} size={48}>Struggle with words at work?</Title>
         </div>
         <div>
-          <textarea
-            placeholder="Eg: I deserve a raise"
-            value={userInput}
-            onChange={onUserChangedText}
-          />
+          <Text fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
         </div>
-        <div>
-          <a
-            onClick={callGenerateEndpoint}
-          >
-            <div>
-              {isGenerating ? <span></span> : <p>Convert</p>}
-            </div>
-          </a>
-        </div>
-        {apiOutput && (
-          <div>
-            <div>
-              <div>
-                <h3>Output:</h3>
-              </div>
-            </div>
-            <div>
-              <p>{apiOutput}</p>
-            </div>
-          </div>
-        )}
       </div>
+      <form style={{ marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' }} onSubmit={callGenerateEndpoint}>
+        <TextInput
+          value={userInput}
+          onChange={onUserChangedText}
+          placeholder="Eg: I deserve a raise"
+          size='md'
+          radius='md'
+          disabled={isGenerating}
+          sx={{ flex: 1 }}
+        />
+
+        <ActionIcon variant="default" type="submit" disabled={isGenerating} size='lg' ml={8} radius='md' h={42} w={42}>
+          <IconArrowRight size={24} />
+        </ActionIcon>
+      </form>
+
+      {isGenerating && <Loader color="dark" variant="dots" mt={24} />}
+
+      {apiOutput && (
+        <div style={{ marginTop: '24px', padding: '20px', width: '80%', backgroundColor: '#fafafa', borderRadius: '8px', border: '1px solid #e1e1e1', textAlign: 'left' }}>
+          {apiOutput}
+        </div>
+      )}
+    </div>
   );
 };
 
