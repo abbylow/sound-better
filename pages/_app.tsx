@@ -4,8 +4,6 @@ import { MantineProvider, MantineThemeOverride } from '@mantine/core';
 import Head from 'next/head';
 import AppLayout from '../components/Layout';
 
-import './styles.css';
-
 declare global {
   interface Window {
     plausible: any;
