@@ -2,9 +2,9 @@ import {
   Container,
   Footer,
   Text,
-  Image,
+  ActionIcon,
 } from '@mantine/core';
-import { socialMedia } from '../constants/links';
+import { IconCup, IconBrandTwitter, IconBrandLinkedin } from '@tabler/icons';
 
 const AppFooter: React.FC = () => {
   return (
@@ -14,24 +14,15 @@ const AppFooter: React.FC = () => {
           <Text fw={700} fz="md">© 2022 SoundBetter. All rights reserved.</Text>
 
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {
-              socialMedia.map(sm => (
-                <a
-                  href={sm.link}
-                  target={'_blank'}
-                  rel='noreferrer noopener'
-                  key={sm.link}
-                >
-                  <Image
-                    width={28}
-                    height={28}
-                    src={sm.imgSrc}
-                    alt={sm.imgAlt}
-                    m={4}
-                  />
-                </a>
-              ))
-            }
+            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://twitter.com/Abby25855379"  target="_blank">
+              <IconBrandTwitter size={24} />
+            </ActionIcon>
+            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://www.linkedin.com/in/abbylow0713/"  target="_blank">
+              <IconBrandLinkedin size={24} />
+            </ActionIcon>
+            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://www.buymeacoffee.com/abbylow" target="_blank">
+              <IconCup size={24} />
+            </ActionIcon>
           </div>
         </div>
       </Container>
