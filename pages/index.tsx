@@ -41,14 +41,14 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '24px', marginTop: '24px' }}>
-      <Title mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
+      <Title weight={900} mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
         },
       })}>
         Struggle with words at work?
       </Title>
-      <Text fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
+      <Text fw={700} fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
 
       <form style={{ marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' }} onSubmit={callGenerateEndpoint}>
         <TextInput
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           size='md'
           radius='md'
           disabled={isGenerating}
-          sx={{ flex: 1 }}
+          sx={{ flex: 1, input: { fontWeight: 700 } }}
         />
 
         <ActionIcon variant="default" type="submit" disabled={isGenerating} size='lg' ml={8} radius='md' h={42} w={42}>
@@ -69,9 +69,9 @@ const Home: NextPage = () => {
       {isGenerating && <Loader color="dark" variant="dots" mt={24} />}
 
       {apiOutput && (
-        <div style={{ marginTop: '24px', padding: '20px', width: '80%', backgroundColor: '#fafafa', borderRadius: '8px', border: '1px solid #e1e1e1', textAlign: 'left' }}>
+        <Text fw={700} mt={24} p={20} w={'80%'} bg={'#fafafa'} ta={'left'} sx={{ borderRadius: '8px', border: '1px solid #e1e1e1' }}>
           {apiOutput}
-        </div>
+        </Text>
       )}
     </div>
   );

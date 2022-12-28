@@ -19,7 +19,7 @@ const AppHeader: React.FC = () => {
             alt="Sound Better logo"
             mr={4}
           />
-          <Text fw={700} fz="xl">SoundBetter</Text>
+          <Text fw={900} fz="xl">SoundBetter</Text>
         </div>
       </Container>
     </Header>
