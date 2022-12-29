@@ -20,9 +20,6 @@ const AppFooter: React.FC = () => {
             <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://github.com/abbylow"  target="_blank">
               <IconBrandGithub size={24} />
             </ActionIcon>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://www.buymeacoffee.com/abbylow" target="_blank">
-              <IconCup size={24} />
-            </ActionIcon>
           </div>
         </div>
       </Container>
