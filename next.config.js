@@ -6,7 +6,7 @@ module.exports = {
       return [
           {
               source: '/js/script.js',
-              destination: 'http://167.172.7.89:8000/js/script.js'
+              destination: 'http://167.172.7.89:8000/js/script.tagged-events.js'
           },
           {
               source: '/api/event', // Or '/api/event/' if you have `trailingSlash: true` in this config
