@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
-import { ActionIcon, Loader, Title, TextInput, Text } from '@mantine/core';
+import { ActionIcon, Loader, Title, TextInput, Text, createStyles } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight } from '@tabler/icons';
+
+const useStyles = createStyles(() => ({
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginBottom: '24px',
+    marginTop: '24px'
+  },
+  form: { marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' },
+}));
 
 const Home: NextPage = () => {
   const [userInput, setUserInput] = useState<string>('');
@@ -39,8 +51,10 @@ const Home: NextPage = () => {
 
   const largeScreen = useMediaQuery('(min-width: 992px)');
 
+  const { classes } = useStyles();
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', marginBottom: '24px', marginTop: '24px' }}>
+    <div className={classes.wrapper}>
       <Title weight={900} mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
@@ -50,7 +64,7 @@ const Home: NextPage = () => {
       </Title>
       <Text fw={700} fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
 
-      <form style={{ marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' }} onSubmit={callGenerateEndpoint}>
+      <form className={classes.form} onSubmit={callGenerateEndpoint}>
         <TextInput
           value={userInput}
           onChange={onUserChangedText}
