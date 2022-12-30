@@ -39,6 +39,7 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
             div: { textDecoration: 'none', color: '#2c2c2c' },
             '&:hover': { textDecoration: 'none' }
           }}
+          className="plausible-event-name=Sponsor"
         >
           <ActionIcon size='md' variant='transparent' color="dark" mr={4}>
             <IconHeart size={20} />
