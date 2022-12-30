@@ -56,11 +56,11 @@ const generateAction = async (
 		};
 	}
 ) => {
-	console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`);
+	console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Rephrased: `}`);
 
 	const baseCompletion = await openai.createCompletion({
 		model: "text-davinci-003",
-		prompt: `${basePromptPrefix}${req.body.userInput}\n${`Rephrased:`}`,
+		prompt: `${basePromptPrefix}${req.body.userInput}\n${`Rephrased: `}`,
 		temperature: 0.7,
 		max_tokens: 1000,
 	});
