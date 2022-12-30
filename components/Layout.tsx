@@ -25,7 +25,21 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
         footer={<AppFooter />}
       >
         {children}
-        <Anchor href="https://www.buymeacoffee.com/abbylow" target="_blank" pos='fixed' left={30} bottom={largeScreen ? 90 : 130} p={8} bg={'#ffdd00'} display={'flex'} sx={{ borderRadius: '8px', alignItems: 'center', div: {textDecoration: 'none', color: '#2c2c2c'} }}>
+        <Anchor
+          href="https://www.buymeacoffee.com/abbylow"
+          target="_blank"
+          pos='fixed'
+          left={30}
+          bottom={largeScreen ? 90 : 130}
+          p={8} bg={'#ffdd00'}
+          display={'flex'}
+          sx={{
+            borderRadius: '8px',
+            alignItems: 'center',
+            div: { textDecoration: 'none', color: '#2c2c2c' },
+            '&:hover': { textDecoration: 'none' }
+          }}
+        >
           <ActionIcon size='md' variant='transparent' color="dark" mr={4}>
             <IconHeart size={20} />
           </ActionIcon>
