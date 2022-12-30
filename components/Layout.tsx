@@ -44,7 +44,7 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
           <ActionIcon size='md' variant='transparent' color="dark" mr={4}>
             <IconHeart size={20} />
           </ActionIcon>
-          <Text fw={700} fz="md" mr={4}>Sponsor me</Text>
+          <Text fw={700} fz="md" mr={4}>Sponsor us</Text>
         </Anchor>
       </AppShell>
     </Container>
