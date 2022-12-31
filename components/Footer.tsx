@@ -4,8 +4,9 @@ import {
   Text,
   ActionIcon,
   createStyles,
+  Tooltip,
 } from '@mantine/core';
-import { IconBrandTwitter, IconBrandGithub, IconBrandTelegram } from '@tabler/icons';
+import { IconBrandTwitter, IconBrandGithub, IconBrandTelegram, IconHeart } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   wrapper: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', flexWrap: 'wrap' },
@@ -21,15 +22,26 @@ const AppFooter: React.FC = () => {
           <Text fw={900} fz="md">© 2022 SoundBetter. All rights reserved.</Text>
 
           <div className={classes.iconWrapper}>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://t.me/SoundBetterBot" target="_blank">
-              <IconBrandTelegram size={24} />
-            </ActionIcon>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://twitter.com/Abby25855379" target="_blank">
-              <IconBrandTwitter size={24} />
-            </ActionIcon>
+            <Tooltip label="Use in Telegram">
+              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://t.me/SoundBetterBot" target="_blank">
+                <IconBrandTelegram size={24} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Sponsor us">
+              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://buy.stripe.com/dR6cNPf4db7c4JqeUV" target="_blank">
+                <IconHeart color={'#db2778'} size={24} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Feedback here">
+              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://twitter.com/abbyotwtofire" target="_blank">
+                <IconBrandTwitter size={24} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="More projects">
             <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://github.com/abbylow" target="_blank">
               <IconBrandGithub size={24} />
             </ActionIcon>
+            </Tooltip>
           </div>
         </div>
       </Container>
