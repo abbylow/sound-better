@@ -5,7 +5,7 @@ import {
   ActionIcon,
   createStyles,
 } from '@mantine/core';
-import { IconBrandTwitter, IconBrandGithub } from '@tabler/icons';
+import { IconBrandTwitter, IconBrandGithub, IconBrandTelegram } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   wrapper: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', flexWrap: 'wrap' },
@@ -21,10 +21,13 @@ const AppFooter: React.FC = () => {
           <Text fw={900} fz="md">© 2022 SoundBetter. All rights reserved.</Text>
 
           <div className={classes.iconWrapper}>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://twitter.com/Abby25855379"  target="_blank">
+            <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://t.me/SoundBetterBot" target="_blank">
+              <IconBrandTelegram size={24} />
+            </ActionIcon>
+            <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://twitter.com/Abby25855379" target="_blank">
               <IconBrandTwitter size={24} />
             </ActionIcon>
-            <ActionIcon size='md' variant='transparent' color="dark" m={4}  component="a" href="https://github.com/abbylow"  target="_blank">
+            <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://github.com/abbylow" target="_blank">
               <IconBrandGithub size={24} />
             </ActionIcon>
           </div>
