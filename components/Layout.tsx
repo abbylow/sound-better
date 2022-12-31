@@ -33,7 +33,8 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
           pos='fixed'
           left={30}
           bottom={largeScreen ? 90 : 130}
-          p={8} bg={'#ffdd00'}
+          p={8}
+          bg={'#ffdd00'}
           display={'flex'}
           sx={{
             borderRadius: '8px',
