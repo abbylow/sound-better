@@ -14,6 +14,8 @@ interface IAppLayout {
   children: React.ReactElement;
 }
 
+const SPONSOR_LINK = "https://buy.stripe.com/dR6cNPf4db7c4JqeUV"
+
 const AppLayout: React.FC<IAppLayout> = ({ children }) => {
   const largeScreen = useMediaQuery('(min-width: 992px)');
 
@@ -26,7 +28,7 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
       >
         {children}
         <Anchor
-          href="https://www.buymeacoffee.com/abbylow"
+          href={SPONSOR_LINK}
           target="_blank"
           pos='fixed'
           left={30}
