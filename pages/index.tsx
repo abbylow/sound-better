@@ -20,7 +20,7 @@ const useStyles = createStyles(() => ({
     width: '80%',
     backgroundColor: '#fafafa',
     borderRadius: '8px',
-    border: '1px solid #e1e1e1',
+    border: '1px solid #CED4DA',
     display: 'flex',
     alignItems: 'center'
   }
@@ -100,7 +100,7 @@ const Home: NextPage = () => {
           <CopyButton value={apiOutput} timeout={2000}>
             {({ copied, copy }) => (
               <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="top">
-                <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                <ActionIcon color={copied ? 'teal' : 'dark'} onClick={copy} variant="transparent" size='lg' ml={8} radius='md' h={42} w={42}>
                   {copied ? <IconCheck size={24} /> : <IconCopy size={24} />}
                 </ActionIcon>
               </Tooltip>
