@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
-import { ActionIcon, Loader, Title, TextInput, Text, createStyles } from '@mantine/core';
+import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconArrowRight } from '@tabler/icons';
+import { IconArrowRight, IconCheck, IconCopy } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   wrapper: {
@@ -14,6 +14,16 @@ const useStyles = createStyles(() => ({
     marginTop: '24px'
   },
   form: { marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' },
+  outputWrapper: {
+    marginTop: '24px',
+    padding: '20px',
+    width: '80%',
+    backgroundColor: '#fafafa',
+    borderRadius: '8px',
+    border: '1px solid #e1e1e1',
+    display: 'flex',
+    alignItems: 'center'
+  }
 }));
 
 const Home: NextPage = () => {
@@ -83,9 +93,20 @@ const Home: NextPage = () => {
       {isGenerating && <Loader color="dark" variant="dots" mt={24} />}
 
       {apiOutput && (
-        <Text fw={700} mt={24} p={20} w={'80%'} bg={'#fafafa'} ta={'left'} sx={{ borderRadius: '8px', border: '1px solid #e1e1e1' }}>
-          {apiOutput}
-        </Text>
+        <div className={classes.outputWrapper}>
+          <Text fw={700} ta={'left'} sx={{ flex: 1}}>
+            {apiOutput}
+          </Text>
+          <CopyButton value={apiOutput} timeout={2000}>
+            {({ copied, copy }) => (
+              <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="top">
+                <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+                  {copied ? <IconCheck size={24} /> : <IconCopy size={24} />}
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </CopyButton>
+        </div>
       )}
     </div>
   );
