@@ -19,7 +19,7 @@ const AppHeader: React.FC = () => {
   const { classes } = useStyles();
 
   return (
-    <Header height={96} bg={'#fafafa'}>
+    <Header height={96} bg={'#fafafa'} fixed={true}>
       <Anchor
         href={'https://t.me/SoundBetterBot'}
         target="_blank"

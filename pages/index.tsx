@@ -1,18 +1,10 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
-import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip } from '@mantine/core';
+import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Container } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight, IconCheck, IconCopy } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    marginBottom: '24px',
-    marginTop: '24px'
-  },
   form: { marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' },
   outputWrapper: {
     marginTop: '24px',
@@ -64,7 +56,7 @@ const Home: NextPage = () => {
   const { classes } = useStyles();
 
   return (
-    <div className={classes.wrapper}>
+    <Container mt={95} p={24} display={'flex'} ta={'center'} sx={{ flexDirection: 'column', alignItems: 'center' }}>
       <Title weight={900} mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
@@ -94,7 +86,7 @@ const Home: NextPage = () => {
 
       {apiOutput && (
         <div className={classes.outputWrapper}>
-          <Text fw={700} ta={'left'} sx={{ flex: 1}}>
+          <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
             {apiOutput}
           </Text>
           <CopyButton value={apiOutput} timeout={2000}>
@@ -108,7 +100,7 @@ const Home: NextPage = () => {
           </CopyButton>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

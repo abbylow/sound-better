@@ -1,7 +1,4 @@
-import {
-  AppShell,
-  Container,
-} from '@mantine/core';
+import { AppShell } from '@mantine/core';
 import AppFooter from './Footer';
 import AppHeader from './Header';
 
@@ -11,15 +8,14 @@ interface IAppLayout {
 
 const AppLayout: React.FC<IAppLayout> = ({ children }) => {
   return (
-    <Container size="lg">
-      <AppShell
-        padding={0}
-        header={<AppHeader />}
-        footer={<AppFooter />}
-      >
-        {children}
-      </AppShell>
-    </Container>
+    <AppShell
+      fixed={false}
+      header={<AppHeader />}
+      footer={<AppFooter />}
+      styles={{ body: { height: '100vh' } }}
+    >
+      {children}
+    </AppShell>
   );
 };
 
