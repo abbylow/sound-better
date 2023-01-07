@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { NextPage } from 'next';
 import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Container } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconArrowRight, IconCheck, IconCopy } from '@tabler/icons';
+import { IconArrowRight, IconCheck, IconCopy, IconX } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   form: { marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' },
@@ -25,6 +25,12 @@ const Home: NextPage = () => {
 
   const callGenerateEndpoint = async (event) => {
     event.preventDefault();
+
+    if (!(userInput?.trim())) {
+      console.log('Given invalid user input')
+      return;
+    }
+
     window.plausible("Convert");
 
     setIsGenerating(true);
@@ -51,6 +57,11 @@ const Home: NextPage = () => {
     setUserInput(event.target.value);
   };
 
+  const reset = () => {
+    setUserInput('');
+    setApiOutput('');
+  }
+
   const largeScreen = useMediaQuery('(min-width: 992px)');
 
   const { classes } = useStyles();
@@ -75,6 +86,11 @@ const Home: NextPage = () => {
           radius='md'
           disabled={isGenerating}
           sx={{ flex: 1, input: { fontWeight: 700 } }}
+          rightSection={
+            <ActionIcon variant='transparent' onClick={reset} disabled={isGenerating}>
+              <IconX size={22} />
+            </ActionIcon>
+          }
         />
 
         <ActionIcon variant="default" type="submit" disabled={isGenerating} size='lg' ml={8} radius='md' h={42} w={42}>
