@@ -87,9 +87,9 @@ const Home: NextPage = () => {
           disabled={isGenerating}
           sx={{ flex: 1, input: { fontWeight: 700 } }}
           rightSection={
-            <ActionIcon variant='transparent' onClick={reset} disabled={isGenerating}>
+            userInput?.trim() && (<ActionIcon variant='transparent' onClick={reset} disabled={isGenerating}>
               <IconX size={22} />
-            </ActionIcon>
+            </ActionIcon>)
           }
         />
 
