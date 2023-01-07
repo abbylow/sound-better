@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { NextPage } from 'next';
 import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight, IconCheck, IconCopy, IconX } from '@tabler/icons';
@@ -17,7 +16,7 @@ const useStyles = createStyles(() => ({
   }
 }));
 
-const Playground: NextPage = () => {
+const Playground: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
   const [apiOutput, setApiOutput] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -67,10 +66,11 @@ const Playground: NextPage = () => {
 
   return (
     <>
-      <Title weight={900} mt={'xl'} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
+      <Title weight={900} mt={'xl'} order={1} size={largeScreen ? 48 : 36} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
         },
+        textShadow: '5px 5px 1px #a8ccf7'
       })}>
         Struggle with words at work?
       </Title>
