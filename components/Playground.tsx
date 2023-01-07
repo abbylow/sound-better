@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import type { NextPage } from 'next';
-import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip } from '@mantine/core';
+import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight, IconCheck, IconCopy, IconX } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
-  form: { marginTop: '24px', width: '80%', display: 'flex', alignItems: 'center' },
+  form: { width: '80%', display: 'flex', alignItems: 'center' },
   outputWrapper: {
-    marginTop: '24px',
     padding: '20px',
     width: '80%',
     backgroundColor: '#fafafa',
@@ -68,15 +67,16 @@ const Playground: NextPage = () => {
 
   return (
     <>
-      <Title weight={900} mt={24} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
+      <Title weight={900} mt={'xl'} order={1} size={largeScreen ? 48 : 32} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
         },
       })}>
         Struggle with words at work?
       </Title>
-      <Text fw={700} fz="lg" mt={24}>Input your thoughts below, we will turn it to a professional message</Text>
+      <Text fw={700} fz="lg" mt={'xl'}>Input your thoughts below, we will turn it to a professional message</Text>
 
+      <Space h="xl" />
       <form className={classes.form} onSubmit={callGenerateEndpoint}>
         <TextInput
           value={userInput}
@@ -98,23 +98,26 @@ const Playground: NextPage = () => {
         </ActionIcon>
       </form>
 
-      {isGenerating && <Loader color="dark" variant="dots" mt={24} />}
+      {isGenerating && <Loader color="dark" variant="dots" mt={'xl'} />}
 
       {apiOutput && (
-        <div className={classes.outputWrapper}>
-          <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
-            {apiOutput}
-          </Text>
-          <CopyButton value={apiOutput} timeout={2000}>
-            {({ copied, copy }) => (
-              <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="top">
-                <ActionIcon color={copied ? 'teal' : 'dark'} onClick={copy} variant="transparent" size='lg' ml={8} radius='md' h={42} w={42}>
-                  {copied ? <IconCheck size={24} /> : <IconCopy size={24} />}
-                </ActionIcon>
-              </Tooltip>
-            )}
-          </CopyButton>
-        </div>
+        <>
+          <Space h="xl" />
+          <div className={classes.outputWrapper}>
+            <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
+              {apiOutput}
+            </Text>
+            <CopyButton value={apiOutput} timeout={2000}>
+              {({ copied, copy }) => (
+                <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="top">
+                  <ActionIcon color={copied ? 'teal' : 'dark'} onClick={copy} variant="transparent" size='lg' ml={8} radius='md' h={42} w={42}>
+                    {copied ? <IconCheck size={24} /> : <IconCopy size={24} />}
+                  </ActionIcon>
+                </Tooltip>
+              )}
+            </CopyButton>
+          </div>
+        </>
       )}
     </>
   );
