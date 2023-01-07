@@ -23,7 +23,7 @@ const Examples: React.FC = () => {
 
   return (
     <div className={classes.wrapper}>
-      <Title weight={900} order={1}>
+      <Title weight={900} order={1} sx={() => ({ textShadow: '5px 5px 1px #a8ccf7' })}>
         Example Use Cases
       </Title>
 
