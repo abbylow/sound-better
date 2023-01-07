@@ -12,7 +12,7 @@ const AppLayout: React.FC<IAppLayout> = ({ children }) => {
       fixed={false}
       header={<AppHeader />}
       footer={<AppFooter />}
-      styles={{ body: { height: '100vh' } }}
+      styles={{ body: { minHeight: '100vh' } }}
     >
       {children}
     </AppShell>
