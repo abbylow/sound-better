@@ -34,20 +34,24 @@ const Playground: React.FC = () => {
     setIsGenerating(true);
     setApiOutput('');
 
-    console.log("Calling OpenAI...")
-    const response = await fetch('/api/generate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userInput: userInput?.trim() }),
-    });
+    try {
+      console.log("Calling OpenAI...")
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userInput: userInput?.trim() }),
+      });
 
-    const data = await response.json();
-    const { output } = data;
-    console.log("OpenAI replied...", output.text)
+      const data = await response.json();
+      const { output } = data;
+      setApiOutput(output.text);
+    } catch (err) {
+      console.error('Fail to generate output ', err.message)
+      setApiOutput('Something went wrong. Please try again');
+    }
 
-    setApiOutput(output.text);
     setIsGenerating(false);
   }
 
