@@ -34,8 +34,9 @@ const Examples: React.FC = () => {
         <Text fw={700} fz="lg" mt={'xl'}>
           {`"${example?.input}"`}
         </Text>
-        <Space h="xl" />
-        <IconArrowDown size={24} />
+        <Text fw={700} fz="lg" mt={'xl'}>
+          Try to say this: 
+        </Text>
         <Text fw={700} fz="lg" mt={'xl'}>
           {`"${example?.output}"`}
         </Text>
