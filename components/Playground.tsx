@@ -48,7 +48,8 @@ const Playground: React.FC = () => {
       const { output } = data;
       setApiOutput(output.text);
     } catch (err) {
-      console.error('Fail to generate output ', err.message)
+      console.error('Fail to generate output ', err.message);
+      window.plausible("API_Error");
       setApiOutput('Something went wrong. Please try again');
     }
 
