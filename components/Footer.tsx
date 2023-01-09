@@ -6,7 +6,7 @@ import {
   createStyles,
   Tooltip,
 } from '@mantine/core';
-import { IconBrandTelegram, IconHeart } from '@tabler/icons';
+import { IconBrandGithub, IconBrandTelegram, IconHeart } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   wrapper: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', flexWrap: 'wrap' },
@@ -35,6 +35,11 @@ const AppFooter: React.FC = () => {
             <Tooltip label="Sponsor us">
               <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://buy.stripe.com/dR6cNPf4db7c4JqeUV" target="_blank">
                 <IconHeart color={'#db2778'} size={24} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="More projects">
+              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://github.com/abbylow" target="_blank">
+                <IconBrandGithub size={24} />
               </ActionIcon>
             </Tooltip>
           </div>
