@@ -37,11 +37,11 @@ const AppFooter: React.FC = () => {
                 <IconHeart color={'#db2778'} size={24} />
               </ActionIcon>
             </Tooltip>
-            <Tooltip label="More projects">
+            {/* <Tooltip label="More projects">
               <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://github.com/abbylow" target="_blank">
                 <IconBrandGithub size={24} />
               </ActionIcon>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </Container>
