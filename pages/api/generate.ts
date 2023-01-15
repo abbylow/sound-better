@@ -4,26 +4,26 @@ const ACCOUNT_IDENTIFIER = process.env.ACCOUNT_IDENTIFIER;
 const NAMESPACE = process.env.NAMESPACE;
 const KEY_IDENTIFIER = "sourgrapes";
 
-const fetchApiKeys = async() => {
-  return await fetch(
-    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_IDENTIFIER}/storage/kv/namespaces/${NAMESPACE}/values/${KEY_IDENTIFIER}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.CF_TOKEN}`,
-      },
-    }
-  )
-    .then((response) => response.text())
-    .then((result) => {
-      return JSON.parse(result);
-    })
-    .catch((error) => {
-      console.error("Fail to get API KEY", error);
-      return [];
-    });
-}
+const fetchApiKeys = async () => {
+	return await fetch(
+		`https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_IDENTIFIER}/storage/kv/namespaces/${NAMESPACE}/values/${KEY_IDENTIFIER}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${process.env.CF_TOKEN}`,
+			},
+		}
+	)
+		.then((response) => response.text())
+		.then((result) => {
+			return JSON.parse(result);
+		})
+		.catch((error) => {
+			console.error("Fail to get API KEY", error);
+			return [];
+		});
+};
 
 const basePromptPrefix = `Given an input sentence, rephrase it to be polite and professional sentence. Ensure the meaning is conveyed in decent manner. When the input contains curse words, convert it to express the emotion and don't apologize for it. Check the example below:
 Input: Fuck you
@@ -50,36 +50,61 @@ Input: Stop following up every 20 minutes. I’ll get back to you when I can
 Output: I would appreciate your patience, as I need time to address this. I will provide an update once one is available
 Input: `;
 
-const generateAction = async (req: { body: { userInput: string } }, res) => {
-	console.log(`API Input: ${req.body.userInput}`);
+const MAX_RETRY = 3;
+let retryCount = 0;
+let needRetry = false;
 
-  const sourGrapes = await fetchApiKeys();
-  const randomIndex = Math.floor(Math.random() * sourGrapes.length);
+const resetCounter = () => {
+  retryCount = 0;
+  needRetry = false;
+}
 
-  const configuration = new Configuration({
-    apiKey: sourGrapes[randomIndex],
-  });
-
-  const openai = new OpenAIApi(configuration);
-
+const callOpenApi = async (keys: string[], userInput: string) => {
 	try {
+		const randomIndex = Math.floor(Math.random() * keys.length);
+		const configuration = new Configuration({
+			apiKey: keys[randomIndex],
+		});
+		
+    const openai = new OpenAIApi(configuration);
+
 		const baseCompletion = await openai.createCompletion({
 			model: "text-davinci-003",
-			prompt: `${basePromptPrefix}${req.body.userInput}\n${`Output: `}`,
+			prompt: `${basePromptPrefix}${userInput}\n${`Output: `}`,
 			temperature: 0.7,
 			max_tokens: 1000,
 		});
-
 		const basePromptOutput = baseCompletion.data.choices.pop();
-
-		console.log(`API Output: ${basePromptOutput?.text}`);
-		res.status(200).json({ output: basePromptOutput });
+    
+    resetCounter();
+		
+    return basePromptOutput;
 	} catch (err) {
-		console.error(
-			`API Error: ${err?.response?.status} ${err?.response?.statusText}`
-		);
-		res.status(500).json({ error: "Fail to generate output" });
+		retryCount++;
+		needRetry = true;
 	}
+};
+
+const generateAction = async (req: { body: { userInput: string } }, res) => {
+	console.log(`API Input: ${req.body.userInput}`);
+
+	const keys = await fetchApiKeys();
+
+	let basePromptOutput;
+	basePromptOutput = await callOpenApi(keys, req.body.userInput);
+
+	while (needRetry && retryCount < MAX_RETRY) {
+		basePromptOutput = await callOpenApi(keys, req.body.userInput);
+	}
+
+	if (basePromptOutput) {
+		console.log(`API Output: ${basePromptOutput?.text}`);
+    res.status(200).json({ output: basePromptOutput });
+	} else {
+    resetCounter();
+    console.error("API Error: Failed to generate output");
+		res.status(500).json({ error: "Fail to generate output" });
+  }
 };
 
 export default generateAction;
