@@ -60,8 +60,9 @@ const resetCounter = () => {
 }
 
 const callOpenApi = async (keys: string[], userInput: string) => {
-	try {
-		const randomIndex = Math.floor(Math.random() * keys.length);
+  const randomIndex = Math.floor(Math.random() * keys.length);
+	
+  try {
 		const configuration = new Configuration({
 			apiKey: keys[randomIndex],
 		});
@@ -80,6 +81,7 @@ const callOpenApi = async (keys: string[], userInput: string) => {
 		
     return basePromptOutput;
 	} catch (err) {
+    console.error(`API key error ${keys[randomIndex]} ${err?.response?.status} ${err?.response?.statusText}`);
 		retryCount++;
 		needRetry = true;
 	}
