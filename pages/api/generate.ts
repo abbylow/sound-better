@@ -1,13 +1,29 @@
-import {
-	Configuration,
-	OpenAIApi,
-} from "openai";
+import { Configuration, OpenAIApi } from "openai";
 
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY,
-});
+const ACCOUNT_IDENTIFIER = process.env.ACCOUNT_IDENTIFIER;
+const NAMESPACE = process.env.NAMESPACE;
+const KEY_IDENTIFIER = "sourgrapes";
 
-const openai = new OpenAIApi(configuration);
+const fetchApiKeys = async() => {
+  return await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_IDENTIFIER}/storage/kv/namespaces/${NAMESPACE}/values/${KEY_IDENTIFIER}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.CF_TOKEN}`,
+      },
+    }
+  )
+    .then((response) => response.text())
+    .then((result) => {
+      return JSON.parse(result);
+    })
+    .catch((error) => {
+      console.error("Fail to get API KEY", error);
+      return [];
+    });
+}
 
 const basePromptPrefix = `Given an input sentence, rephrase it to be polite and professional sentence. Ensure the meaning is conveyed in decent manner. When the input contains curse words, convert it to express the emotion and don't apologize for it. Check the example below:
 Input: Fuck you
@@ -36,6 +52,15 @@ Input: `;
 
 const generateAction = async (req: { body: { userInput: string } }, res) => {
 	console.log(`API Input: ${req.body.userInput}`);
+
+  const sourGrapes = await fetchApiKeys();
+  const randomIndex = Math.floor(Math.random() * sourGrapes.length);
+
+  const configuration = new Configuration({
+    apiKey: sourGrapes[randomIndex],
+  });
+
+  const openai = new OpenAIApi(configuration);
 
 	try {
 		const baseCompletion = await openai.createCompletion({
