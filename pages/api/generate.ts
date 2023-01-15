@@ -59,7 +59,7 @@ const generateAction = async (
 
 	const basePromptOutput = baseCompletion.data.choices.pop();
 
-  console.log(`API Output: ${basePromptOutput}`);
+  console.log(`API Output: ${basePromptOutput?.text}`);
 	res.status(200).json({ output: basePromptOutput });
 };
 
