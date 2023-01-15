@@ -46,7 +46,6 @@ const Playground: React.FC = () => {
     setError(false);
 
     try {
-      console.log("Calling OpenAI...")
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {

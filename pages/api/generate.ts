@@ -1,6 +1,5 @@
 import {
 	Configuration,
-	CreateCompletionResponseChoicesInner,
 	OpenAIApi,
 } from "openai";
 
@@ -35,32 +34,27 @@ Input: Stop following up every 20 minutes. I’ll get back to you when I can
 Output: I would appreciate your patience, as I need time to address this. I will provide an update once one is available
 Input: `;
 
-const generateAction = async (
-	req: { body: { userInput: string } },
-	res: {
-		status: (arg0: number) => {
-			(): any;
-			new (): any;
-			json: {
-				(arg0: { output: CreateCompletionResponseChoicesInner }): void;
-				new (): any;
-			};
-		};
-	}
-) => {
+const generateAction = async (req: { body: { userInput: string } }, res) => {
 	console.log(`API Input: ${req.body.userInput}`);
 
-	const baseCompletion = await openai.createCompletion({
-		model: "text-davinci-003",
-		prompt: `${basePromptPrefix}${req.body.userInput}\n${`Output: `}`,
-		temperature: 0.7,
-		max_tokens: 1000,
-	});
+	try {
+		const baseCompletion = await openai.createCompletion({
+			model: "text-davinci-003",
+			prompt: `${basePromptPrefix}${req.body.userInput}\n${`Output: `}`,
+			temperature: 0.7,
+			max_tokens: 1000,
+		});
 
-	const basePromptOutput = baseCompletion.data.choices.pop();
+		const basePromptOutput = baseCompletion.data.choices.pop();
 
-  console.log(`API Output: ${basePromptOutput?.text}`);
-	res.status(200).json({ output: basePromptOutput });
+		console.log(`API Output: ${basePromptOutput?.text}`);
+		res.status(200).json({ output: basePromptOutput });
+	} catch (err) {
+		console.error(
+			`API Error: ${err?.response?.status} ${err?.response?.statusText}`
+		);
+		res.status(500).json({ error: "Fail to generate output" });
+	}
 };
 
 export default generateAction;
