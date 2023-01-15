@@ -15,7 +15,6 @@ const myTheme: MantineThemeOverride = {
   fontFamilyMonospace: 'Inter, sans serif',
   headings: { fontFamily: 'Inter, sans serif' },
   colorScheme: 'light',
-  primaryColor: 'indigo',
   black: '#2c2c2c',
   fontSizes: {
     xs: 12,
