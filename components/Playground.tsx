@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space } from '@mantine/core';
+import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space, Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconArrowRight, IconCheck, IconCopy, IconX } from '@tabler/icons';
+import { IconArrowRight, IconBrandTwitter, IconCheck, IconCopy, IconX } from '@tabler/icons';
 
 const useStyles = createStyles((classes) => ({
   form: { width: '80%', display: 'flex', alignItems: 'center' },
@@ -57,7 +57,7 @@ const Playground: React.FC = () => {
 
       const data = await response.json();
       const { output } = data;
-      setApiOutput(output.text);
+      setApiOutput(output.text?.trim());
     } catch (err) {
       console.error('Fail to generate output ', err.message);
       window.plausible("API_Error");
@@ -75,6 +75,11 @@ const Playground: React.FC = () => {
     setUserInput('');
     setApiOutput('');
     setError(false);
+  }
+
+  const handleTweet = () => {
+    const prefix = `soundbetter.cc makes me sound pro: `;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(prefix + '"' + apiOutput + '"')}`, '_blank');
   }
 
   const largeScreen = useMediaQuery('(min-width: 992px)');
@@ -134,6 +139,9 @@ const Playground: React.FC = () => {
               )}
             </CopyButton>
           </div>
+          <Button mt='lg' variant="light" radius="md" size="md" leftIcon={<IconBrandTwitter />} onClick={handleTweet}>
+            Tweet
+          </Button>
         </>
       )}
 
