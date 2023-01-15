@@ -3,7 +3,7 @@ import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, T
 import { useMediaQuery } from '@mantine/hooks';
 import { IconArrowRight, IconCheck, IconCopy, IconX } from '@tabler/icons';
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((classes) => ({
   form: { width: '80%', display: 'flex', alignItems: 'center' },
   outputWrapper: {
     padding: '20px',
@@ -13,12 +13,22 @@ const useStyles = createStyles(() => ({
     border: '1px solid #CED4DA',
     display: 'flex',
     alignItems: 'center'
+  },
+  errorWrapper: {
+    padding: '20px',
+    width: '80%',
+    backgroundColor: classes.colors.red[1],
+    borderRadius: '8px',
+    border: `1px solid ${classes.colors.red[2]}`,
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
 const Playground: React.FC = () => {
   const [userInput, setUserInput] = useState<string>('');
   const [apiOutput, setApiOutput] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
   const callGenerateEndpoint = async (event) => {
@@ -33,6 +43,7 @@ const Playground: React.FC = () => {
 
     setIsGenerating(true);
     setApiOutput('');
+    setError(false);
 
     try {
       console.log("Calling OpenAI...")
@@ -50,7 +61,7 @@ const Playground: React.FC = () => {
     } catch (err) {
       console.error('Fail to generate output ', err.message);
       window.plausible("API_Error");
-      setApiOutput('Something went wrong. Please try again');
+      setError(true);
     }
 
     setIsGenerating(false);
@@ -63,6 +74,7 @@ const Playground: React.FC = () => {
   const reset = () => {
     setUserInput('');
     setApiOutput('');
+    setError(false);
   }
 
   const largeScreen = useMediaQuery('(min-width: 992px)');
@@ -124,6 +136,18 @@ const Playground: React.FC = () => {
           </div>
         </>
       )}
+
+      {error && (
+        <>
+          <Space h="xl" />
+          <div className={classes.errorWrapper}>
+            <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
+              {"Something went wrong, please try again :( "}
+            </Text>
+          </div>
+        </>
+      )}
+
     </>
   );
 };
