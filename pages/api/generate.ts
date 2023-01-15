@@ -48,7 +48,7 @@ const generateAction = async (
 		};
 	}
 ) => {
-	console.log(`API: ${basePromptPrefix}${req.body.userInput}\n${`Output: `}`);
+	console.log(`API Input: ${req.body.userInput}`);
 
 	const baseCompletion = await openai.createCompletion({
 		model: "text-davinci-003",
@@ -59,6 +59,7 @@ const generateAction = async (
 
 	const basePromptOutput = baseCompletion.data.choices.pop();
 
+  console.log(`API Output: ${basePromptOutput}`);
 	res.status(200).json({ output: basePromptOutput });
 };
 
