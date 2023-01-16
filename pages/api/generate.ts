@@ -1,17 +1,20 @@
 import { Configuration, OpenAIApi } from "openai";
+import FormData from "form-data";
+import fetch from "node-fetch";
+import { RequestInit } from "node-fetch";
 
-const ACCOUNT_IDENTIFIER = process.env.ACCOUNT_IDENTIFIER;
-const NAMESPACE = process.env.NAMESPACE;
 const KEY_IDENTIFIER = "sourgrapes";
+const KV_URL = `https://api.cloudflare.com/client/v4/accounts/${process.env.ACCOUNT_IDENTIFIER}/storage/kv/namespaces/${process.env.NAMESPACE}/values/${KEY_IDENTIFIER}`;
+const KV_AUTH_TOKEN = `Bearer ${process.env.CF_TOKEN}`;
 
 const fetchApiKeys = async () => {
 	return await fetch(
-		`https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_IDENTIFIER}/storage/kv/namespaces/${NAMESPACE}/values/${KEY_IDENTIFIER}`,
+		KV_URL,
 		{
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${process.env.CF_TOKEN}`,
+				Authorization: KV_AUTH_TOKEN
 			},
 		}
 	)
@@ -20,9 +23,31 @@ const fetchApiKeys = async () => {
 			return JSON.parse(result);
 		})
 		.catch((error) => {
-			console.error("Fail to get API KEY", error);
+			console.error("Fail to get API keys from KV", error);
 			return [];
 		});
+};
+
+const updateApiKeys = async (updatedKeys: string) => {
+	const formdata = new FormData();
+	formdata.append("metadata", "{}");
+	formdata.append("value", updatedKeys);
+
+	const requestOptions: RequestInit = {
+		method: "PUT",
+		headers: {
+			Authorization: KV_AUTH_TOKEN,
+		},
+		body: formdata,
+	};
+
+	fetch(
+		KV_URL,
+		requestOptions
+	)
+		.then((response) => response.text())
+		.then((result) => console.log(result))
+		.catch((error) => console.log("Fail to update API keys to KV", error));
 };
 
 const basePromptPrefix = `Given an input sentence, rephrase it to be polite and professional sentence. Ensure the meaning is conveyed in decent manner. When the input contains curse words, convert it to express the emotion and don't apologize for it. Check the example below:
@@ -55,19 +80,20 @@ let retryCount = 0;
 let needRetry = false;
 
 const resetCounter = () => {
-  retryCount = 0;
-  needRetry = false;
-}
+	retryCount = 0;
+	needRetry = false;
+};
 
 const callOpenApi = async (keys: string[], userInput: string) => {
-  const randomIndex = Math.floor(Math.random() * keys.length);
-	
-  try {
+	const randomIndex = Math.floor(Math.random() * keys.length);
+	const randomKey = keys[randomIndex];
+
+	try {
 		const configuration = new Configuration({
-			apiKey: keys[randomIndex],
+			apiKey: randomKey,
 		});
-		
-    const openai = new OpenAIApi(configuration);
+
+		const openai = new OpenAIApi(configuration);
 
 		const baseCompletion = await openai.createCompletion({
 			model: "text-davinci-003",
@@ -76,12 +102,20 @@ const callOpenApi = async (keys: string[], userInput: string) => {
 			max_tokens: 1000,
 		});
 		const basePromptOutput = baseCompletion.data.choices.pop();
-    
-    resetCounter();
-		
-    return basePromptOutput;
+
+		resetCounter();
+
+		return basePromptOutput;
 	} catch (err) {
-    console.error(`API key error ${keys[randomIndex]} ${err?.response?.status} ${err?.response?.statusText}`);
+		console.error(
+			`API key error ${randomKey} ${err?.response?.status} ${err?.response?.statusText}`
+		);
+		if (err?.response?.status === 429) {
+			if (keys.includes(randomKey)) {
+				const updatedKeys = keys.filter((el) => el !== randomKey);
+				updateApiKeys(JSON.stringify(updatedKeys));
+			}
+		}
 		retryCount++;
 		needRetry = true;
 	}
@@ -101,12 +135,12 @@ const generateAction = async (req: { body: { userInput: string } }, res) => {
 
 	if (basePromptOutput) {
 		console.log(`API Output: ${basePromptOutput?.text}`);
-    res.status(200).json({ output: basePromptOutput });
+		res.status(200).json({ output: basePromptOutput });
 	} else {
-    resetCounter();
-    console.error("API Error: Failed to generate output");
+		resetCounter();
+		console.error("API Error: Failed to generate output");
 		res.status(500).json({ error: "Fail to generate output" });
-  }
+	}
 };
 
 export default generateAction;
