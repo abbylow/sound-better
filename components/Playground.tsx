@@ -1,24 +1,21 @@
 import { useState } from 'react';
 import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space, Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconCheck, IconCopy, IconX } from '@tabler/icons';
+import { IconCheck, IconClipboard, IconX } from '@tabler/icons';
 
 const useStyles = createStyles((classes) => ({
-  form: {
-    width: '80%',
-  },
   outputWrapper: {
     padding: '20px',
-    width: '80%',
     backgroundColor: '#fafafa',
     borderRadius: '8px',
     border: '1px solid #CED4DA',
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center'
   },
   errorWrapper: {
     padding: '20px',
-    width: '80%',
     backgroundColor: classes.colors.red[1],
     borderRadius: '8px',
     border: `1px solid ${classes.colors.red[2]}`,
@@ -85,7 +82,7 @@ const Playground: React.FC = () => {
     setApiOutput('');
     setError(false);
   }
-  
+
   const largeScreen = useMediaQuery('(min-width: 992px)');
 
   const { classes } = useStyles();
@@ -105,7 +102,7 @@ const Playground: React.FC = () => {
       </Text>
 
       <Space h="xl" />
-      <form className={classes.form} onSubmit={callGenerateEndpoint}>
+      <form style={{ width: largeScreen ? '80%' : '100%' }} onSubmit={callGenerateEndpoint}>
         <TextInput
           value={userInput}
           onChange={onUserChangedText}
@@ -126,7 +123,7 @@ const Playground: React.FC = () => {
           gradient={{ from: 'indigo', to: 'cyan' }}
           size="lg"
           radius='md'
-          mt="xl"
+          mt="lg"
           type="submit"
           disabled={isGenerating}
         >
@@ -139,15 +136,15 @@ const Playground: React.FC = () => {
       {apiOutput && (
         <>
           <Space h="xl" />
-          <div className={classes.outputWrapper}>
-            <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
+          <div className={classes.outputWrapper} style={{ width: largeScreen ? '80%' : '100%' }}>
+            <Text fw={700} sx={{ flex: 1 }}>
               {apiOutput}
             </Text>
             <CopyButton value={apiOutput} timeout={2000}>
               {({ copied, copy }) => (
                 <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="top">
-                  <ActionIcon color={copied ? 'teal' : 'dark'} onClick={copy} variant="transparent" size='lg' ml={8} radius='md' h={42} w={42}>
-                    {copied ? <IconCheck size={24} /> : <IconCopy size={24} />}
+                  <ActionIcon color={copied ? 'teal' : 'dark'} onClick={copy} variant="transparent" size='lg' radius='md' h={42} w={42}>
+                    {copied ? <IconCheck size={24} /> : <IconClipboard size={24} />}
                   </ActionIcon>
                 </Tooltip>
               )}
@@ -159,7 +156,7 @@ const Playground: React.FC = () => {
       {error && (
         <>
           <Space h="xl" />
-          <div className={classes.errorWrapper}>
+          <div className={classes.errorWrapper} style={{ width: largeScreen ? '80%' : '100%' }}>
             <Text fw={700} ta={'left'} sx={{ flex: 1 }}>
               {"Something went wrong, please try again :( "}
             </Text>
