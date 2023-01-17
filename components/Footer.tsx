@@ -19,7 +19,7 @@ const AppFooter: React.FC = () => {
     <Footer height={{ base: 110, sm: 70 }} p="md" bg={'#fafafa'}>
       <Container size="lg" sx={{ height: '100%' }}>
         <div className={classes.wrapper}>
-          <Text fw={900} fz="md">© 2022 SoundBetter. All rights reserved.</Text>
+          <Text fw={900} fz="md">© 2023 SoundBetter. All rights reserved.</Text>
 
           <div className={classes.iconWrapper}>
             <Tooltip label="Feedback here">
