@@ -1,10 +1,9 @@
 import { Card, Title, Text, Space, createStyles } from "@mantine/core";
-import { IconArrowDown } from '@tabler/icons';
 import { useEffect, useState } from "react";
 import { exampleData, exampleSwitchInterval, IExample, randomize } from "../constants/example";
 
 const useStyles = createStyles(() => ({
-  wrapper: { marginTop: 96, marginBottom: 56 },
+  wrapper: { marginTop: 96, marginBottom: 96 },
 }));
 
 const Examples: React.FC = () => {
