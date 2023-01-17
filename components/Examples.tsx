@@ -1,4 +1,5 @@
-import { Card, Title, Text, Space, createStyles } from "@mantine/core";
+import { Card, Title, Text, createStyles } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { exampleData, exampleSwitchInterval, IExample, randomize } from "../constants/example";
 
@@ -20,9 +21,11 @@ const Examples: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const largeScreen = useMediaQuery('(min-width: 992px)');
+
   return (
     <div className={classes.wrapper}>
-      <Title weight={900} order={1} sx={() => ({ textShadow: '5px 5px 1px #a8ccf7' })}>
+      <Title weight={900} order={1} size={largeScreen ? 48 : 34} sx={() => ({ textShadow: '5px 5px 1px #a8ccf7' })}>
         Example Use Cases
       </Title>
 

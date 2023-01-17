@@ -22,6 +22,14 @@ const useStyles = createStyles((classes) => ({
     border: `1px solid ${classes.colors.red[2]}`,
     display: 'flex',
     alignItems: 'center'
+  },
+  wrapper: {
+    minHeight: '71vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
   }
 }));
 
@@ -86,16 +94,18 @@ const Playground: React.FC = () => {
   const { classes } = useStyles();
 
   return (
-    <>
-      <Title weight={900} mt={'xl'} order={1} size={largeScreen ? 48 : 36} sx={(theme) => ({
+    <div className={classes.wrapper}>
+      <Title weight={900} order={1} size={largeScreen ? 48 : 34} sx={(theme) => ({
         '@media (max-width: 755px)': {
           padding: theme.spacing.sm,
         },
         textShadow: '5px 5px 1px #a8ccf7'
       })}>
-        Struggle with words at work?
+        Make your communication sound better
       </Title>
-      <Text fw={700} fz="lg" mt={'xl'}>Input your thoughts below, we will turn it to a professional message</Text>
+      <Text fw={700} fz="xl" mt={'xl'}>
+        Polish your thoughts into professional language for workplace communication. For free.
+      </Text>
 
       <Space h="xl" />
       <form className={classes.form} onSubmit={callGenerateEndpoint}>
@@ -155,7 +165,7 @@ const Playground: React.FC = () => {
         </>
       )}
 
-    </>
+    </div>
   );
 };
 
