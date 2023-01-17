@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import { exampleData, exampleSwitchInterval, IExample, randomize } from "../constants/example";
 
 const useStyles = createStyles(() => ({
-  wrapper: { marginTop: 96, marginBottom: 96 },
+  wrapper: {
+    marginTop: 96,
+    marginBottom: 96,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  },
 }));
 
 const Examples: React.FC = () => {
@@ -29,7 +37,7 @@ const Examples: React.FC = () => {
         Example Use Cases
       </Title>
 
-      <Card shadow="sm" p="xl" radius="md" withBorder mt={'xl'}>
+      <Card shadow="sm" p="xl" radius="md" withBorder mt={'xl'} w={'100%'}>
         <Text fw={700} fz="lg">
           {`If you are ${example?.scenario} Instead of saying`}
         </Text>
@@ -37,7 +45,7 @@ const Examples: React.FC = () => {
           {`"${example?.input}"`}
         </Text>
         <Text fw={700} fz="lg" mt={'xl'}>
-          Try to say this: 
+          Try to say this:
         </Text>
         <Text fw={700} fz="lg" mt={'xl'}>
           {`"${example?.output}"`}
