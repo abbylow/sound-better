@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { ActionIcon, Loader, Title, TextInput, Text, createStyles, CopyButton, Tooltip, Space, Button } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconArrowRight, IconBrandTwitter, IconCheck, IconCopy, IconX } from '@tabler/icons';
+import { IconCheck, IconCopy, IconX } from '@tabler/icons';
 
 const useStyles = createStyles((classes) => ({
-  form: { width: '80%', display: 'flex', alignItems: 'center' },
+  form: {
+    width: '80%',
+  },
   outputWrapper: {
     padding: '20px',
     width: '80%',
@@ -83,12 +85,7 @@ const Playground: React.FC = () => {
     setApiOutput('');
     setError(false);
   }
-
-  const handleTweet = () => {
-    const prefix = `soundbetter.cc makes me sound pro: `;
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(prefix + '"' + apiOutput + '"')}`, '_blank');
-  }
-
+  
   const largeScreen = useMediaQuery('(min-width: 992px)');
 
   const { classes } = useStyles();
@@ -124,9 +121,17 @@ const Playground: React.FC = () => {
           }
         />
 
-        <ActionIcon variant="default" type="submit" disabled={isGenerating} size='lg' ml={8} radius='md' h={42} w={42}>
-          <IconArrowRight size={24} />
-        </ActionIcon>
+        <Button
+          variant="gradient"
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          size="lg"
+          radius='md'
+          mt="xl"
+          type="submit"
+          disabled={isGenerating}
+        >
+          Polish now
+        </Button>
       </form>
 
       {isGenerating && <Loader color="dark" variant="dots" mt={'xl'} />}
@@ -148,9 +153,6 @@ const Playground: React.FC = () => {
               )}
             </CopyButton>
           </div>
-          <Button mt='lg' variant="light" radius="md" size="md" leftIcon={<IconBrandTwitter />} onClick={handleTweet}>
-            Tweet
-          </Button>
         </>
       )}
 
