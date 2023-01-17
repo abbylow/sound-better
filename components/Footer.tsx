@@ -32,11 +32,11 @@ const AppFooter: React.FC = () => {
                 <IconBrandTelegram size={24} />
               </ActionIcon>
             </Tooltip>
-            <Tooltip label="Sponsor us">
+            {/* <Tooltip label="Sponsor us">
               <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://buy.stripe.com/dR6cNPf4db7c4JqeUV" target="_blank">
                 <IconHeart color={'#db2778'} size={24} />
               </ActionIcon>
-            </Tooltip>
+            </Tooltip> */}
             <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://twitter.com/soundbetter_cc" target="_blank">
               <IconBrandTwitter size={24} />
             </ActionIcon>
