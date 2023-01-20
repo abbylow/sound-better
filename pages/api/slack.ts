@@ -7,7 +7,7 @@ const slackGenerate = async (req, res) => {
   console.log('input ', input)
   res.status(200).json({
     text: `I received input ${input}`,
-    "replace_original": "true",
+    replace_original: "true",
   });
 };
 
