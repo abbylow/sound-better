@@ -1,7 +1,7 @@
 const slackGenerate = async (req, res) => {
-	console.log('req', req)
-  console.log('req.body', req.body)
-  res.status(200).json({ output: 'test success' });
+  const input = req.body.text?.trim();
+  console.log('input ', input)
+  res.status(200).json(`I received input ${input}`);
 };
 
 export default slackGenerate;
