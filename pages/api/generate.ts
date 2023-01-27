@@ -75,7 +75,7 @@ Input: Stop following up every 20 minutes. I’ll get back to you when I can
 Output: I would appreciate your patience, as I need time to address this. I will provide an update once one is available
 Input: `;
 
-const MAX_RETRY = 3;
+const MAX_RETRY = 10;
 let retryCount = 0;
 let needRetry = false;
 
@@ -110,12 +110,13 @@ const callOpenApi = async (keys: string[], userInput: string) => {
 		console.error(
 			`API key error ${randomKey} ${err?.response?.status} ${err?.response?.statusText}`
 		);
-		if (err?.response?.status === 429) {
-			if (keys.includes(randomKey)) {
-				const updatedKeys = keys.filter((el) => el !== randomKey);
-				updateApiKeys(JSON.stringify(updatedKeys));
-			}
-		}
+    // comment this to avoid keep deleting keys that still have credits
+		// if (err?.response?.status === 429) {
+		// 	if (keys.includes(randomKey)) {
+		// 		const updatedKeys = keys.filter((el) => el !== randomKey);
+		// 		updateApiKeys(JSON.stringify(updatedKeys));
+		// 	}
+		// }
 		retryCount++;
 		needRetry = true;
 	}
@@ -138,7 +139,7 @@ const generateAction = async (req: { body: { userInput: string } }, res) => {
 		res.status(200).json({ output: basePromptOutput });
 	} else {
 		resetCounter();
-		console.error("API Error: Failed to generate output");
+		console.error("GGWP API Error: Failed to generate output");
 		res.status(500).json({ error: "Fail to generate output" });
 	}
 };
