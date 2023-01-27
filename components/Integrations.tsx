@@ -5,7 +5,7 @@ import telegramLogo from '../assets/tg.svg';
 
 const useStyles = createStyles(() => ({
   wrapper: {
-    minHeight: '71vh',
+    minHeight: '60vh',
     marginTop: 96,
     marginBottom: 96,
     display: 'flex',

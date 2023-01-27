@@ -23,7 +23,7 @@ const useStyles = createStyles((classes) => ({
     alignItems: 'center'
   },
   wrapper: {
-    minHeight: '71vh',
+    minHeight: '70vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

@@ -5,7 +5,7 @@ import { exampleData, exampleSwitchInterval, IExample, randomize } from "../cons
 
 const useStyles = createStyles(() => ({
   wrapper: {
-    minHeight: '71vh',
+    minHeight: '60vh',
     marginTop: 96,
     marginBottom: 96,
     display: 'flex',
