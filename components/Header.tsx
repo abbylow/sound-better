@@ -7,7 +7,7 @@ import {
   Anchor,
   ActionIcon,
 } from '@mantine/core';
-import { IconBrandTelegram } from '@tabler/icons';
+import { IconBrandSlack } from '@tabler/icons';
 
 import soundBetterLogo from '../assets/logo.svg';
 
@@ -21,10 +21,10 @@ const AppHeader: React.FC = () => {
   return (
     <Header height={96} bg={'#fafafa'} fixed={true}>
       <Anchor
-        href={'https://t.me/SoundBetterBot'}
+        href={'https://sound-better-slack-app-production.up.railway.app/slack/install'}
         target="_blank"
         p={'4px 0'}
-        bg={'#2481CC'}
+        bg={'#4A154B'}
         display={'flex'}
         sx={{
           alignItems: 'center',
@@ -32,12 +32,12 @@ const AppHeader: React.FC = () => {
           div: { textDecoration: 'none', color: 'white' },
           '&:hover': { textDecoration: 'none' }
         }}
-        className="plausible-event-name=TGBanner"
+        className="plausible-event-name=SlackBanner"
       >
         <ActionIcon size='md' variant='transparent' color="dark" mr={2}>
-          <IconBrandTelegram color={'white'} size={20} />
+          <IconBrandSlack color={'white'} size={20} />
         </ActionIcon>
-        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>@SoundBetterBot is live now!</Text>
+        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>Slack App is live now!</Text>
       </Anchor>
 
       <Container size="lg" p="md">
