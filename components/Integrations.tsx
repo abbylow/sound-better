@@ -62,8 +62,8 @@ const Examples: React.FC = () => {
               href="https://sound-better-slack-app-production.up.railway.app/slack/install"
               leftIcon={
                 <Image
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                   src={slackLogo.src}
                   alt="Slack logo"
                 />
@@ -91,8 +91,8 @@ const Examples: React.FC = () => {
               href="https://t.me/SoundBetterBot"
               leftIcon={
                 <Image
-                  width={24}
-                  height={24}
+                  width={28}
+                  height={28}
                   src={telegramLogo.src}
                   alt="Telegram logo"
                 />
