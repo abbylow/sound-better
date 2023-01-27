@@ -6,7 +6,7 @@ import {
   createStyles,
   Tooltip,
 } from '@mantine/core';
-import { IconBrandLinkedin, IconBrandTelegram, IconBrandTwitter, IconHeart } from '@tabler/icons';
+import { IconBrandLinkedin, IconBrandTelegram, IconBrandTwitter, IconBrandSlack } from '@tabler/icons';
 
 const useStyles = createStyles(() => ({
   wrapper: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', flexWrap: 'wrap' },
@@ -22,21 +22,19 @@ const AppFooter: React.FC = () => {
           <Text fw={900} fz="md">© 2023 SoundBetter. All rights reserved.</Text>
 
           <div className={classes.iconWrapper}>
-            <Tooltip label="Feedback here">
               <a href="https://www.producthunt.com/posts/soundbetter-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-soundbetter&#0045;2" target="_blank">
                 <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=374076&theme=light" alt="SoundBetter - A&#0032;tool&#0032;to&#0032;turn&#0032;your&#0032;thoughts&#0032;to&#0032;professional&#0032;messages | Product Hunt" style={{ width: '143px', height: '32px' }} />
               </a>
-            </Tooltip>
             <Tooltip label="Use in Telegram">
               <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://t.me/SoundBetterBot" target="_blank">
                 <IconBrandTelegram size={24} />
               </ActionIcon>
             </Tooltip>
-            {/* <Tooltip label="Sponsor us">
-              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://buy.stripe.com/dR6cNPf4db7c4JqeUV" target="_blank">
-                <IconHeart color={'#db2778'} size={24} />
+            <Tooltip label="Use in Slack">
+              <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://sound-better-slack-app-production.up.railway.app/slack/install" target="_blank">
+                <IconBrandSlack size={24} />
               </ActionIcon>
-            </Tooltip> */}
+            </Tooltip>
             <ActionIcon size='md' variant='transparent' color="dark" m={4} component="a" href="https://twitter.com/soundbetter_cc" target="_blank">
               <IconBrandTwitter size={24} />
             </ActionIcon>
