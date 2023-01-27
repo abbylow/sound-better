@@ -86,7 +86,7 @@ const resetCounter = () => {
 
 const callOpenApi = async (keys: string[], userInput: string) => {
 	const randomIndex = Math.floor(Math.random() * keys.length);
-	const randomKey = keys[randomIndex];
+	const randomKey = keys[randomIndex] || keys[0];
 
 	try {
 		const configuration = new Configuration({
