@@ -51,6 +51,7 @@ const Examples: React.FC = () => {
               Use slash command <Code>/soundbetter</Code> in any conversation to polish your message. Your original input will be only visible to you.
             </Text>
             <Button
+              className="plausible-event-name=SlackBtn"
               variant="default"
               size={largeScreen ? 'lg' : 'md'}
               radius='md'
@@ -79,6 +80,7 @@ const Examples: React.FC = () => {
               Direct message to @SoundBetterBot in Telegram to convert your message to be professional.
             </Text>
             <Button
+              className="plausible-event-name=TGBtn"
               variant="default"
               size={largeScreen ? 'lg' : 'md'}
               radius='md'
