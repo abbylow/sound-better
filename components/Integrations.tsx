@@ -104,7 +104,6 @@ const Examples: React.FC = () => {
         </Card>
       </SimpleGrid>
 
-
     </div>
   );
 };

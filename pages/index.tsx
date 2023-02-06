@@ -3,6 +3,7 @@ import { Container } from '@mantine/core';
 import Playground from '../components/Playground';
 import Examples from '../components/Examples';
 import Integrations from '../components/Integrations';
+import Affiliation from '../components/Affiliation';
 
 const Home: NextPage = () => {
   return (
@@ -10,6 +11,7 @@ const Home: NextPage = () => {
       <Playground />
       <Integrations />
       <Examples />
+      <Affiliation />
     </Container>
   );
 };
