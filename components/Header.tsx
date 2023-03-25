@@ -6,6 +6,8 @@ import {
   createStyles,
   Anchor,
   ActionIcon,
+  Center,
+  Box,
 } from '@mantine/core';
 import { IconBrandSlack } from '@tabler/icons';
 
@@ -20,7 +22,18 @@ const AppHeader: React.FC = () => {
 
   return (
     <Header height={96} bg={'#fafafa'} fixed={true}>
-      <Anchor
+      <Box
+        sx={(theme) => ({
+          backgroundColor: theme.colors.blue,
+          textAlign: 'center',
+          color: '#fafafa',
+          padding: '4px 0',
+          cursor: 'pointer'
+        })}
+      >
+        <Text fw={700} fz={{ base: 'sm', sm: 'md' }}>The service is unavailable now as we ran out of credits.</Text>
+      </Box>
+      {/* <Anchor
         href={'https://sound-better-slack-app-production.up.railway.app/slack/install'}
         target="_blank"
         p={'4px 0'}
@@ -34,12 +47,11 @@ const AppHeader: React.FC = () => {
         }}
         className="plausible-event-name=SlackBanner"
       >
-        {/* <ActionIcon size='md' variant='transparent' color="dark" mr={2}>
+        <ActionIcon size='md' variant='transparent' color="dark" mr={2}>
           <IconBrandSlack color={'white'} size={20} />
         </ActionIcon>
-        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>Slack App is live now!</Text> */}
-        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>The service is unavailable now as we ran out of API credits. We are working on it. </Text>
-      </Anchor>
+        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>Slack App is live now!</Text>
+      </Anchor> */}
 
       <Container size="lg" p="md">
         <div className={classes.wrapper}>
