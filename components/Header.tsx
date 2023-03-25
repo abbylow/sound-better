@@ -34,10 +34,11 @@ const AppHeader: React.FC = () => {
         }}
         className="plausible-event-name=SlackBanner"
       >
-        <ActionIcon size='md' variant='transparent' color="dark" mr={2}>
+        {/* <ActionIcon size='md' variant='transparent' color="dark" mr={2}>
           <IconBrandSlack color={'white'} size={20} />
         </ActionIcon>
-        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>Slack App is live now!</Text>
+        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>Slack App is live now!</Text> */}
+        <Text fw={700} fz={{base: 'sm', sm: 'md'}}>The service is unavailable now as we ran out of API credits. We are working on it. </Text>
       </Anchor>
 
       <Container size="lg" p="md">
