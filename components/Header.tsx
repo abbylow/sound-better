@@ -27,8 +27,7 @@ const AppHeader: React.FC = () => {
           backgroundColor: theme.colors.blue,
           textAlign: 'center',
           color: '#fafafa',
-          padding: '4px 0',
-          cursor: 'pointer'
+          padding: '4px 0'
         })}
       >
         <Text fw={700} fz={{ base: 'sm', sm: 'md' }}>The service is unavailable now as we ran out of credits.</Text>
